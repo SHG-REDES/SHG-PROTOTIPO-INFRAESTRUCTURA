@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="es-CO" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHG Soluciones Integrales - Plataforma Inteligente SmartField Bogotá v5.0</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- QR Code Generator Library CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            shg: {
+              blue: '#0284c7',
+              darkblue: '#0369a1',
+              navy: '#0b1329',
+              accent: '#06b6d4',
+              panel: '#1e293b',
+              border: '#334155'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #060a17;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Pattern Grid background */
+    .grid-bg {
+      background-size: 30px 30px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    .pulse-glow {
+      animation: pulse-glow-anim 2.2s infinite;
+    }
+    @keyframes pulse-glow-anim {
+      0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.35); }
+      50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.85); }
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090e1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+
+    @keyframes scanline {
+      0% { top: 0%; }
+      50% { top: 90%; }
+      100% { top: 0%; }
+    }
+    .scanner-line {
+      animation: scanline 2.2s infinite linear;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col grid-bg font-sans antialiased selection:bg-cyan-500 selection:text-black">
+
+  <!-- CORPORATE HEADER FEATURING RECREATED SHG VECTOR LOGO -->
+  <header class="border-b border-slate-800 bg-slate-900/95 backdrop-blur-md sticky top-0 z-40 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- SHG VECTOR BRANDING RECREATION -->
+      <div class="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-start">
+        <div class="flex items-center gap-3">
+          
+          <!-- RECREATED HIGH-FIDELITY SHG SVG LOGO FROM USER IMAGE -->
+          <div class="w-16 h-16 bg-slate-950 rounded-xl border border-cyan-500/40 p-1 flex items-center justify-center shadow-lg shadow-cyan-950/60 shrink-0">
+            <svg viewBox="0 0 500 360" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="shgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" />
+                  <stop offset="50%" stop-color="#0369a1" />
+                  <stop offset="100%" stop-color="#082f49" />
+                </linearGradient>
+                <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#06b6d4" />
+                </linearGradient>
+              </defs>
+
+              <!-- NETWORK GLOBE SPHERE TOP -->
+              <g stroke="#38bdf8" stroke-width="3" fill="none" opacity="0.9">
+                <ellipse cx="250" cy="90" rx="110" ry="70" stroke-dasharray="4,4"/>
+                <path d="M 140,90 Q 250,30 360,90" />
+                <path d="M 140,90 Q 250,150 360,90" />
+                <line x1="250" y1="20" x2="250" y2="160"/>
+                <line x1="180" y1="35" x2="320" y2="145"/>
+                <line x1="180" y1="145" x2="320" y2="35"/>
+
+                <!-- NODES -->
+                <circle cx="250" cy="20" r="7" fill="#0284c7"/>
+                <circle cx="180" cy="35" r="5" fill="#38bdf8"/>
+                <circle cx="320" cy="35" r="5" fill="#38bdf8"/>
+                <circle cx="265" cy="70" r="6" fill="#06b6d4"/>
+                <circle cx="290" cy="90" r="5" fill="#38bdf8"/>
+                <circle cx="190" cy="90" r="6" fill="#0284c7"/>
+                <circle cx="330" cy="110" r="5" fill="#38bdf8"/>
+              </g>
+
+              <!-- MAIN 'SHG' TEXT VECTOR STRUCTURE -->
+              <!-- Letter S -->
+              <path d="M 70,200 C 70,140 190,140 190,180 C 190,220 70,220 70,270 C 70,310 190,310 190,260 L 160,260 C 160,285 100,285 100,270 C 100,245 220,245 220,180 C 220,120 100,120 100,170 Z" fill="url(#shgGrad)" />
+              
+              <!-- Letter H with Shield in the middle -->
+              <rect x="200" y="145" width="28" height="130" rx="4" fill="url(#shgGrad)"/>
+              <rect x="272" y="145" width="28" height="130" rx="4" fill="url(#shgGrad)"/>
+              <rect x="228" y="195" width="44" height="25" fill="url(#shgGrad)"/>
+
+              <!-- CYBERSECURITY SHIELD & PADLOCK IN H -->
+              <g transform="translate(250, 210) scale(0.85)">
+                <path d="M 0,-30 L 25,-15 V 10 C 25,30 0,42 0,42 C 0,42 -25,30 -25,10 V -15 Z" fill="#0369a1" stroke="#38bdf8" stroke-width="3"/>
+                <rect x="-8" y="-2" width="16" height="14" rx="2" fill="#ffffff"/>
+                <path d="M -5,-2 A 5,5 0 0,1 5,-2" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+              </g>
+
+              <!-- Letter G with RJ45 Connector Plug integrated -->
+              <path d="M 410,180 C 410,140 310,140 310,210 C 310,280 420,280 420,220 L 360,220 L 360,245 L 390,245 C 390,260 335,260 335,210 C 335,160 385,160 385,180 Z" fill="url(#shgGrad)"/>
+
+              <!-- RJ45 ETHERNET PLUG ON G -->
+              <g transform="translate(385, 235)">
+                <rect x="0" y="-12" width="30" height="20" rx="2" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>
+                <line x1="5" y1="-12" x2="5" y2="8" stroke="#ffffff" stroke-width="2"/>
+                <line x1="10" y1="-12" x2="10" y2="8" stroke="#ffffff" stroke-width="2"/>
+                <line x1="15" y1="-12" x2="15" y2="8" stroke="#ffffff" stroke-width="2"/>
+                <line x1="20" y1="-12" x2="20" y2="8" stroke="#ffffff" stroke-width="2"/>
+                <rect x="25" y="-6" width="8" height="8" fill="#ffffff"/>
+              </g>
+
+              <!-- BOTTOM SWOOSH LINE -->
+              <path d="M 50,230 C 50,330 450,330 450,230" fill="none" stroke="url(#cyanGlow)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2 font-mono">
+                SHG <span class="text-cyan-400 font-normal text-xs hidden sm:inline font-sans">| Soluciones Integrales</span>
+              </h1>
+              <span class="bg-cyan-500/10 text-cyan-400 text-xs px-2 py-0.5 rounded border border-cyan-500/30 font-mono font-bold">
+                Bogotá D.C.
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 tracking-wider font-semibold">
+              SOLUCIONES INTEGRALES DE INFRAESTRUCTURA Y REDES S.A.S.
+            </p>
+          </div>
+        </div>
+
+        <!-- RELOJ Y METRICAS CORPORATIVAS EN VIVO -->
+        <div class="text-right text-xs font-mono text-slate-400 hidden sm:block">
+          <div class="text-emerald-400 flex items-center justify-end gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>Sede Principal: Calle 93 #14-20, Bogotá D.C.</span>
+          </div>
+          <div id="liveClock" class="text-slate-200 font-bold text-sm">--:--:--</div>
+        </div>
+      </div>
+
+      <!-- SHG 5 CORE SERVICES STRIP FROM LOGO BRANDING -->
+      <div class="flex flex-wrap gap-2 justify-center lg:justify-between text-[11px] font-medium text-slate-300 border-t border-slate-800/80 pt-2.5">
+        <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5 hover:border-cyan-500 transition-colors">
+          <i class="fa-solid fa-shield-halved text-cyan-400"></i> Ciberseguridad
+        </span>
+        <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5 hover:border-blue-400 transition-colors">
+          <i class="fa-solid fa-diagram-project text-blue-400"></i> Redes
+        </span>
+        <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5 hover:border-purple-400 transition-colors">
+          <i class="fa-solid fa-tower-cell text-purple-400"></i> Telecomunicaciones
+        </span>
+        <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5 hover:border-emerald-400 transition-colors">
+          <i class="fa-solid fa-server text-emerald-400"></i> Infraestructura Física y Lógica
+        </span>
+        <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5 hover:border-amber-400 transition-colors">
+          <i class="fa-solid fa-network-wired text-amber-400"></i> Cableado Estructurado y Lógico de Redes
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
+
+    <!-- KPI DASHBOARD TOP CARDS -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- KPI 1: Órdenes Activas -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-lg hover:border-slate-700 transition-all">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider">Órdenes de Servicio</span>
+          <i class="fa-solid fa-list-check text-cyan-400 text-lg"></i>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-3xl font-bold text-white font-mono" id="kpiTotalOrders">0</span>
+          <span class="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-mono" id="kpiCompletedRate">0% Cumplido</span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-1">Gestión activa Bogotá & Alrededores</p>
+      </div>
+
+      <!-- KPI 2: Alertas Inventario -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-lg hover:border-slate-700 transition-all">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider">Alertas Stock Bajo</span>
+          <i class="fa-solid fa-boxes-stacked text-amber-400 text-lg"></i>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-3xl font-bold font-mono text-amber-400" id="badgeLowStockCount">0</span>
+          <span class="text-xs text-amber-300/80 bg-amber-500/10 px-2 py-0.5 rounded font-mono">Reabastecer</span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-1">Control por escaneo QR de técnicos</p>
+      </div>
+
+      <!-- KPI 3: Tiempos Muertos -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-lg hover:border-slate-700 transition-all">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider">Tiempos Muertos</span>
+          <i class="fa-solid fa-triangle-exclamation text-rose-400 text-lg"></i>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-3xl font-bold font-mono text-rose-400" id="kpiDeadTimeAlerts">1</span>
+          <span class="text-xs text-rose-300 bg-rose-500/10 px-2 py-0.5 rounded font-mono animate-pulse">Alerta Proactiva</span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-1" id="kpiDeadTimeSub">Esteban López inactivo (Av. Boyacá)</p>
+      </div>
+
+      <!-- KPI 4: Eficiencia Global -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-lg hover:border-slate-700 transition-all">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider">Eficiencia Operativa</span>
+          <i class="fa-solid fa-chart-line text-emerald-400 text-lg"></i>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-3xl font-bold text-emerald-400 font-mono" id="kpiProductivity">94.8%</span>
+          <span class="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-mono">+3.2% esta sem</span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-1">Respuesta en sitio &lt; 35 min</p>
+      </div>
+
+    </section>
+
+    <!-- PROACTIVE SMART ENGINE ALERT BANNER -->
+    <div class="bg-gradient-to-r from-slate-900 via-cyan-950/50 to-slate-900 border border-cyan-500/40 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 flex items-center justify-center font-bold text-xl shrink-0">
+          <i class="fa-solid fa-brain animate-pulse"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            Motor de Optimización Proactiva Inteligente SHG
+            <span class="text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-2 py-0.5 rounded font-mono uppercase">IA Operativa Bogotá</span>
+          </h3>
+          <p class="text-xs text-slate-300" id="proactiveEngineText">
+            Recomendación IA: Reasignar Orden PQR en Engativá a <strong>Juan Pérez (Técnico 1)</strong> ahorra 35 minutos de trancón en la Av. Boyacá.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-2 w-full md:w-auto justify-end shrink-0">
+        <button onclick="applySmartOptimization()" class="px-4 py-2 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white rounded-xl text-xs font-bold shadow-md transition-all flex items-center gap-1.5 whitespace-nowrap active:scale-95">
+          <i class="fa-solid fa-bolt"></i> Aplicar Optimización IA
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN MODULE WORKSPACE WITH 6 FULL VIEWS -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+      
+      <!-- NAVIGATION TABS HEADER -->
+      <div class="flex flex-wrap border-b border-slate-800 bg-slate-950/60 p-2.5 gap-2">
+        <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all border border-cyan-500/50 bg-slate-800 text-cyan-400">
+          <i class="fa-solid fa-chart-pie text-sm"></i>
+          <span>Centro Proactivo</span>
+        </button>
+        <button onclick="switchTab('pqr')" id="tab-pqr" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/50">
+          <i class="fa-solid fa-clipboard-list text-sm text-cyan-400"></i>
+          <span>Órdenes PQR</span>
+          <span class="ml-1 px-2 py-0.5 text-[10px] bg-cyan-500/20 rounded-full font-mono text-cyan-300" id="badgePqrCount">0</span>
+        </button>
+        <button onclick="switchTab('clients')" id="tab-clients" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/50">
+          <i class="fa-solid fa-building text-sm text-blue-400"></i>
+          <span>Clientes Bogotá (10)</span>
+        </button>
+        <button onclick="switchTab('gps')" id="tab-gps" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/50">
+          <i class="fa-solid fa-map-location-dot text-sm text-emerald-400"></i>
+          <span>Rutas GPS & Maleta Virtual</span>
+        </button>
+        <button onclick="switchTab('warehouse')" id="tab-warehouse" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/50">
+          <i class="fa-solid fa-boxes-packing text-sm text-amber-400"></i>
+          <span>Bodega & QR Real</span>
+        </button>
+        <button onclick="switchTab('team')" id="tab-team" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/50">
+          <i class="fa-solid fa-users-gear text-sm text-purple-400"></i>
+          <span>Estructura SHG (13 Roles)</span>
+        </button>
+      </div>
+
+      <!-- VIEW 1: CENTRO PROACTIVO DASHBOARD -->
+      <div id="view-dashboard" class="p-5 space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          
+          <!-- Monitoreo de Cuellos de Botella -->
+          <div class="lg:col-span-2 bg-slate-950/60 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center justify-between border-b border-slate-800 pb-3">
+              <span><i class="fa-solid fa-triangle-exclamation text-rose-400 mr-2"></i>Monitoreo de Cuellos de Botella Operativos</span>
+              <span class="text-[10px] font-mono bg-rose-500/10 text-rose-400 border border-rose-500/30 px-2 py-0.5 rounded">En Tiempo Real</span>
+            </h3>
+            
+            <div class="space-y-3" id="dashboardAlertsContainer">
+              <!-- Bottleneck 1 -->
+              <div class="bg-slate-900 border border-rose-900/40 p-3.5 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                  <div class="text-xs font-bold text-rose-300 flex items-center gap-2">
+                    <span>Técnico 4 - Esteban López</span>
+                    <span class="bg-rose-950 text-rose-400 text-[10px] px-2 py-0.5 rounded font-mono">Inactivo 45 min</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 mt-1">Ubicación: CC Titán Plaza - Retraso por congestión en la Av. Boyacá.</p>
+                </div>
+                <button onclick="reassignTechAlert('Esteban López')" class="px-3.5 py-2 bg-rose-900/60 hover:bg-rose-800 text-rose-200 rounded-xl text-xs font-semibold border border-rose-700 transition-all flex items-center gap-1.5 shrink-0">
+                  <i class="fa-solid fa-route"></i> Optimizar Ruta
+                </button>
+              </div>
+
+              <!-- Bottleneck 2 -->
+              <div class="bg-slate-900 border border-amber-900/40 p-3.5 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                  <div class="text-xs font-bold text-amber-300 flex items-center gap-2">
+                    <span>Stock Crítico en Bodega Calle 26</span>
+                    <span class="bg-amber-950 text-amber-400 text-[10px] px-2 py-0.5 rounded font-mono">Stock: 4 Unidades</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 mt-1">Cable UTP Cat6A Panduit requiere reabastecimiento para órdenes programadas.</p>
+                </div>
+                <button onclick="switchTab('warehouse')" class="px-3.5 py-2 bg-amber-900/60 hover:bg-amber-800 text-amber-200 rounded-xl text-xs font-semibold border border-amber-700 transition-all flex items-center gap-1.5 shrink-0">
+                  <i class="fa-solid fa-boxes-packing"></i> Ir a Bodega
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Acciones Directas -->
+          <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
+              <i class="fa-solid fa-bolt text-cyan-400"></i> Despacho de Acciones Rápidas
+            </h3>
+            <div class="space-y-2.5">
+              <button onclick="openModal('modalNewPQR')" class="w-full p-3 bg-cyan-950/50 hover:bg-cyan-900/70 border border-cyan-800 text-cyan-300 rounded-xl text-xs font-semibold flex items-center justify-between transition-all">
+                <span><i class="fa-solid fa-plus-circle mr-2"></i> Crear Nueva Orden PQR</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+              <button onclick="openScannerModal()" class="w-full p-3 bg-amber-950/50 hover:bg-amber-900/70 border border-amber-800 text-amber-300 rounded-xl text-xs font-semibold flex items-center justify-between transition-all">
+                <span><i class="fa-solid fa-qrcode mr-2"></i> Escanear / Registrar QR Insumos</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+              <button onclick="switchTab('clients')" class="w-full p-3 bg-blue-950/50 hover:bg-blue-900/70 border border-blue-800 text-blue-300 rounded-xl text-xs font-semibold flex items-center justify-between transition-all">
+                <span><i class="fa-solid fa-building mr-2"></i> Directorio Clientes Corporativos</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+              <button onclick="exportReport()" class="w-full p-3 bg-emerald-950/50 hover:bg-emerald-900/70 border border-emerald-800 text-emerald-300 rounded-xl text-xs font-semibold flex items-center justify-between transition-all">
+                <span><i class="fa-solid fa-file-export mr-2"></i> Exportar Informe de Eficiencia</span>
+                <i class="fa-solid fa-download text-xs"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 2: ÓRDENES DE SERVICIO PQR -->
+      <div id="view-pqr" class="p-5 hidden space-y-5">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+          <div class="flex items-center gap-3">
+            <h2 class="text-sm font-bold text-slate-200">Consola Central de Órdenes PQR (Bogotá D.C.)</h2>
+            <span class="text-xs bg-slate-800 text-slate-400 font-mono px-2.5 py-0.5 rounded-full" id="badgePqrCount">0 Pendientes</span>
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <input type="text" id="searchOrdersInput" onkeyup="renderPQRTable()" placeholder="Buscar cliente, código..." class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 w-full sm:w-56 font-sans">
+            <button onclick="openModal('modalNewPQR')" class="w-full sm:w-auto px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 shadow">
+              <i class="fa-solid fa-circle-plus"></i> Crear Orden
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-800">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-800 font-mono">
+              <tr>
+                <th class="p-3.5">Código / ID</th>
+                <th class="p-3.5">Cliente Corporativo</th>
+                <th class="p-3.5">Tipo de Servicio</th>
+                <th class="p-3.5">Técnico Asignado</th>
+                <th class="p-3.5">Estado Operativo</th>
+                <th class="p-3.5">Tiempo Ahorrado</th>
+                <th class="p-3.5 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="pqrTableBody" class="divide-y divide-slate-800/60 font-sans">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 3: CLIENTES CORPORATIVOS BOGOTÁ (10 CLIENTES DIRECTOS) -->
+      <div id="view-clients" class="p-5 hidden space-y-5">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+          <div>
+            <h2 class="text-sm font-bold text-slate-200">Base de Datos de Clientes Corporativos Bogotá D.C.</h2>
+            <p class="text-xs text-slate-400">Directorio oficial de sedes corporativas con contratos de servicio activos.</p>
+          </div>
+          <div class="w-full sm:w-auto">
+            <input type="text" id="searchClientsInput" onkeyup="renderClientsTable()" placeholder="Filtrar por empresa, NIT o dirección..." class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 w-full sm:w-64 font-sans">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-800">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-800 font-mono">
+              <tr>
+                <th class="p-3.5">Empresa / NIT</th>
+                <th class="p-3.5">Contacto Principal</th>
+                <th class="p-3.5">Ubicación Bogotá</th>
+                <th class="p-3.5">Servicio Contratado</th>
+                <th class="p-3.5">Estado Contrato</th>
+                <th class="p-3.5">Técnico Referente</th>
+                <th class="p-3.5 text-right">Crear PQR</th>
+              </tr>
+            </thead>
+            <tbody id="clientsTableBody" class="divide-y divide-slate-800/60 font-sans">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 4: MAPA GPS BOGOTÁ & MALETA VIRTUAL -->
+      <div id="view-gps" class="p-5 hidden space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          
+          <!-- CONTENEDOR MAPA (2 COLS) -->
+          <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-4 relative min-h-[440px] flex flex-col justify-between overflow-hidden shadow-2xl">
+            
+            <div class="flex justify-between items-center z-10 bg-slate-900/90 p-3 rounded-xl border border-slate-800 backdrop-blur">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-location-dot text-cyan-400"></i>
+                <span class="text-xs font-bold text-white">Georreferenciación Satelital Bogotá D.C.</span>
+              </div>
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                GPS Activo (5 Cuadrillas)
+              </span>
+            </div>
+
+            <!-- CANVAS DE MAPA SIMULADO CON SECTORES -->
+            <div id="mapCanvas" class="absolute inset-0 bg-slate-950 grid-bg flex items-center justify-center">
+              <!-- Renderizado dinámico -->
+            </div>
+
+            <div class="z-10 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 backdrop-blur flex flex-wrap justify-between items-center text-[10px] text-slate-400 gap-2">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> En Ruta</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> En Ejecución</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span> Tiempo Muerto</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span> Bodega Calle 26</span>
+            </div>
+          </div>
+
+          <!-- MALETA VIRTUAL TÉCNICOS -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2.5">
+              <i class="fa-solid fa-user-gear text-cyan-400"></i> Maleta Virtual de los 5 Técnicos
+            </h3>
+            <div id="techniciansList" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+              <!-- Renderizado dinámico -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 5: BODEGA & ESCÁNER DE CÓDIGO QR REAL -->
+      <div id="view-warehouse" class="p-5 hidden space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          
+          <!-- TABLA DE INVENTARIO (2 COLS) -->
+          <div class="lg:col-span-2 space-y-3">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-slate-950/50 p-3.5 rounded-xl border border-slate-800">
+              <div>
+                <h3 class="text-sm font-bold text-slate-200">Stock de Inventario Bodega Calle 26</h3>
+                <p class="text-xs text-slate-400">Control de insumos de fibra óptica, conectividad y redes</p>
+              </div>
+              <div class="flex items-center gap-2 w-full sm:w-auto">
+                <input type="text" id="searchInventoryInput" onkeyup="renderInventoryTable()" placeholder="Filtrar insumo..." class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 w-full sm:w-44 font-sans">
+                <button onclick="openScannerModal()" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow shrink-0">
+                  <i class="fa-solid fa-qrcode"></i> Escáner QR Real
+                </button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-slate-800">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-950 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-800 font-mono">
+                  <tr>
+                    <th class="p-3">Material / Código</th>
+                    <th class="p-3">Categoría</th>
+                    <th class="p-3">Stock Actual</th>
+                    <th class="p-3">Mín. Req.</th>
+                    <th class="p-3">Estado Stock</th>
+                    <th class="p-3 text-right">Escanear QR</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryTableBody" class="divide-y divide-slate-800/60 font-sans">
+                  <!-- Renderizado dinámico -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- AUDITORÍA QR DE TRANSACCIONES (1 COL) -->
+          <div class="space-y-4 bg-slate-950/60 border border-slate-800 p-4 rounded-2xl">
+            <div class="border-b border-slate-800 pb-3">
+              <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left text-cyan-400"></i> Auditoría de Transacciones QR
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-0.5">Trazabilidad física en tiempo real</p>
+            </div>
+            
+            <div id="qrLogsContainer" class="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
+              <!-- Renderizado dinámico -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 6: ORGANIGRAMA Y NÓMINA SHG (13 COLABORADORES) -->
+      <div id="view-team" class="p-5 hidden space-y-5">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+          <div>
+            <h3 class="text-sm font-bold text-slate-200">Estructura Organizacional SHG (13 Colaboradores)</h3>
+            <p class="text-xs text-slate-400">Directorio de 1 Director, 2 Gerentes, 2 Ingenieros, 3 Analistas y 5 Técnicos en Bogotá.</p>
+          </div>
+          <span class="text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-3 py-1 rounded-xl">
+            100% Personal Activo
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="teamCardsContainer">
+          <!-- Renderizado dinámico de los 13 integrantes -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-4 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+      <div>
+        © 2026 <strong>SHG Soluciones Integrales de Infraestructura y Redes S.A.S.</strong> - Bogotá D.C., Colombia
+      </div>
+      <div class="flex items-center gap-4 font-mono text-[11px]">
+        <span>Soporte: +57 (601) 745-9000</span>
+        <span class="text-cyan-400">v5.0-SmartField</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL 1: NUEVA ORDEN PQR -->
+  <div id="modalNewPQR" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl relative">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-file-circle-plus text-cyan-400"></i> Crear Nueva Orden de Servicio PQR
+        </h3>
+        <button onclick="closeModal('modalNewPQR')" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="formPQR" onsubmit="handleCreatePQR(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-400 mb-1">Seleccionar Cliente Corporativo</label>
+          <select id="pqrClientSelect" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <!-- Cargado dinámicamente -->
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-400 mb-1">Teléfono Contacto</label>
+            <input type="text" id="pqrPhone" required placeholder="+57 310 555 1234" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Tipo de Servicio</label>
+            <select id="pqrServiceType" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+              <option value="Cableado Estructurado Cat6A">Cableado Estructurado Cat6A</option>
+              <option value="Mantenimiento Racks">Mantenimiento Racks</option>
+              <option value="Auditoría Firewall">Auditoría Firewall</option>
+              <option value="Empalme Fibra Óptica">Empalme Fibra Óptica</option>
+              <option value="Red Wi-Fi 6 Enterprise">Red Wi-Fi 6 Enterprise</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">Dirección en Bogotá</label>
+          <input type="text" id="pqrAddress" required placeholder="Ej: Carrera 7 # 72-41, Chapinero" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">Especificaciones Técnicas / Requerimiento</label>
+          <textarea id="pqrSpecs" rows="2" placeholder="Describa la falla o trabajo de infraestructura..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+          <button type="button" onclick="closeModal('modalNewPQR')" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-semibold">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-semibold shadow">Generar Orden Asignada</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: INTERACTIVE REAL QR SCANNER & GENERATOR -->
+  <div id="modalScanner" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-5 space-y-4 shadow-2xl relative">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-qrcode text-amber-400"></i> Escáner QR Real / Control de Movimiento
+        </h3>
+        <button onclick="closeModal('modalScanner')" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Seleccionar Insumo para Simulación de Lectura QR:</label>
+          <select id="simulatedItemSelect" onchange="generateModalQRCode()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-100 font-mono">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <!-- CONTENEDOR QR DINÁMICO -->
+        <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+          <div id="qrcodeDisplay" class="bg-white p-3 rounded-lg shadow-md"></div>
+          <p class="text-[10px] text-slate-400 font-mono mt-1" id="qrCodeCaption">Código QR Fiel Vinculado al Insumo</p>
+        </div>
+
+        <!-- ACCIONES DE DESPACHO ENTRADA/SALIDA -->
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="executeScan('SALIDA')" class="p-3 bg-cyan-950/70 hover:bg-cyan-900 border border-cyan-800 text-cyan-300 rounded-xl text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all">
+            <i class="fa-solid fa-arrow-up-from-bracket text-lg"></i>
+            <span>Despacho a Técnico (SALIDA)</span>
+          </button>
+          <button onclick="executeScan('ENTRADA')" class="p-3 bg-emerald-950/70 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 rounded-xl text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all">
+            <i class="fa-solid fa-arrow-down-to-bracket text-lg"></i>
+            <span>Devolución a Bodega (ENTRADA)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-cyan-950 border border-cyan-500/50 text-cyan-200 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 z-50">
+    <div class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
+      <i class="fa-solid fa-bell"></i>
+    </div>
+    <div>
+      <h4 class="text-xs font-bold text-white" id="toastTitle">Notificación</h4>
+      <p class="text-[11px] text-cyan-300/80" id="toastMessage">Mensaje del sistema...</p>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC ARCHITECTURE -->
+  <script>
+    // GLOBAL APPLICATION STATE
+    const state = {
+      // 13 EMPLOYEES (1 Director, 2 Managers, 2 Engineers, 3 Analysts, 5 Field Technicians)
+      employees: [
+        { id: 1, name: "Ing. Fernando Gómez", role: "Director General", area: "Dirección Ejecutiva", icon: "user-tie", color: "text-purple-400", cat: "Directivo", phone: "+57 (601) 745-9001" },
+        { id: 2, name: "Ing. Claudia Morales", role: "Gerente de Operaciones", area: "Operaciones", icon: "user-gear", color: "text-blue-400", cat: "Gerencia", phone: "+57 (601) 745-9002" },
+        { id: 3, name: "Ing. Felipe Castro", role: "Gerente Técnico", area: "Infraestructura", icon: "sitemap", color: "text-blue-400", cat: "Gerencia", phone: "+57 (601) 745-9003" },
+        { id: 4, name: "Ing. Carlos Mendoza", role: "Ingeniero Sr. Telecomunicaciones", area: "Redes & Fibra", icon: "laptop-code", color: "text-cyan-400", cat: "Ingeniería", phone: "+57 (601) 745-9004" },
+        { id: 5, name: "Ing. Andrés Silva", role: "Ingeniero de Ciberseguridad", area: "Seguridad Lógica", icon: "shield-halved", color: "text-cyan-400", cat: "Ingeniería", phone: "+57 (601) 745-9005" },
+        { id: 6, name: "Diego Torres", role: "Analista NOC Bogotá", area: "Monitoreo", icon: "chart-line", color: "text-emerald-400", cat: "Analista", phone: "+57 (601) 745-9006" },
+        { id: 7, name: "Sofía Vargas", role: "Analista de Inventario", area: "Logística Bodega", icon: "boxes-stacked", color: "text-emerald-400", cat: "Analista", phone: "+57 (601) 745-9007" },
+        { id: 8, name: "Mateo Ríos", role: "Analista de Calidad PQR", area: "Atención al Cliente", icon: "headset", color: "text-emerald-400", cat: "Analista", phone: "+57 (601) 745-9008" },
+        { id: 9, name: "Juan Pérez", role: "Técnico 1 - Cableado Cat6A", area: "Campo Bogotá", icon: "motorcycle", color: "text-amber-400", cat: "Técnico", phone: "+57 310 456-7891" },
+        { id: 10, name: "Camilo Rodríguez", role: "Técnico 2 - Fibra Óptica", area: "Campo Bogotá", icon: "motorcycle", color: "text-amber-400", cat: "Técnico", phone: "+57 314 890-1234" },
+        { id: 11, name: "Daniela Martínez", role: "Técnico 3 - Racks & Servidores", area: "Campo Bogotá", icon: "motorcycle", color: "text-amber-400", cat: "Técnico", phone: "+57 318 234-5678" },
+        { id: 12, name: "Esteban López", role: "Técnico 4 - CCTV & Redes", area: "Campo Bogotá", icon: "motorcycle", color: "text-amber-400", cat: "Técnico", phone: "+57 311 567-8901" },
+        { id: 13, name: "Alejandro Ruiz", role: "Técnico 5 - Certificación Fluke", area: "Campo Bogotá", icon: "motorcycle", color: "text-amber-400", cat: "Técnico", phone: "+57 320 901-2345" }
+      ],
+
+      // 10 CORPORATE CLIENTS DATABASE (BOGOTÁ D.C.)
+      clients: [
+        { id: "CLI-001", name: "Banco de Bogotá (Sede Calle 72)", nit: "860.003.020-1", contact: "Dra. Patricia Jaramillo", phone: "+57 (601) 332-0000", address: "Calle 72 # 10-07, Chapinero", service: "Auditoría de Ciberseguridad & Firewall", status: "Activo", tech: "Ing. Andrés Silva" },
+        { id: "CLI-002", name: "Clínica del Country", nit: "890.901.123-5", contact: "Dr. Roberto Alarcón", phone: "+57 (601) 530-0470", address: "Carrera 16 # 82-57, Chicó", service: "Empalme de Fibra Óptica OptiTap", status: "En Ejecución", tech: "Camilo Rodríguez (Técnico 2)" },
+        { id: "CLI-003", name: "Centro Comercial Titán Plaza", nit: "900.412.879-3", contact: "Ing. Gonzalo Ramírez", phone: "+57 (601) 744-3000", address: "Av. Boyacá # 80-94, Engativá", service: "Red Wi-Fi 6 Enterprise", status: "En Revisión", tech: "Esteban López (Técnico 4)" },
+        { id: "CLI-004", name: "Edificio Inteligente Connecta", nit: "900.128.554-8", contact: "Arq. Elena Santamaría", phone: "+57 (601) 425-1000", address: "Calle 26 # 92-32, Fontibón", service: "Cableado Estructurado Cat6A", status: "Finalizado", tech: "Juan Pérez (Técnico 1)" },
+        { id: "CLI-005", name: "Zona Franca de Bogotá S.A.", nit: "830.002.911-0", contact: "Ing. Mauricio Hoyos", phone: "+57 (601) 404-6666", address: "Carrera 106 # 15-25, Fontibón", service: "Mantenimiento de Servidores & Racks", status: "Pendiente", tech: "Daniela Martínez (Técnico 3)" },
+        { id: "CLI-006", name: "Universidad de los Andes", nit: "860.007.386-1", contact: "Ing. Carmen Luisa Peña", phone: "+57 (601) 339-4949", address: "Carrera 1 # 18A-12, La Candelaria", service: "Cableado Estructurado Cat6A", status: "Activo", tech: "Alejandro Ruiz (Técnico 5)" },
+        { id: "CLI-007", name: "Empresa de Telecomunicaciones ETB", nit: "899.999.115-8", contact: "Ing. Hernando Barbosa", phone: "+57 (601) 242-0000", address: "Carrera 7 # 20-99, Centro", service: "Empalme de Fibra Óptica OptiTap", status: "En Ejecución", tech: "Ing. Carlos Mendoza" },
+        { id: "CLI-008", name: "Hotel Tequendama Bogotá", nit: "860.001.442-9", contact: "Lic. Javier Soler", phone: "+57 (601) 382-0300", address: "Carrera 10 # 26-21, Teusaquillo", service: "Red Wi-Fi 6 Enterprise", status: "Activo", tech: "Juan Pérez (Técnico 1)" },
+        { id: "CLI-009", name: "Bavaria S.A. Sede Central", nit: "860.005.224-6", contact: "Dra. Mónica Gaitán", phone: "+57 (601) 638-9000", address: "Calle 94 # 7A-47, Usaquén", service: "Auditoría de Ciberseguridad & Firewall", status: "Activo", tech: "Ing. Andrés Silva" },
+        { id: "CLI-010", name: "Movistar Arena Bogotá", nit: "901.055.431-2", contact: "Ing. Camilo Echeverri", phone: "+57 (601) 587-0000", address: "Diagonal 61C # 26-36, Movistar Arena", service: "Mantenimiento de Servidores & Racks", status: "Finalizado", tech: "Daniela Martínez (Técnico 3)" }
+      ],
+
+      // SERVICE ORDERS (PQR)
+      orders: [
+        { id: "ORD-2026-089", client: "Clínica del Country", phone: "+57 (601) 530-0470", type: "Empalme de Fibra Óptica OptiTap", address: "Carrera 16 # 82-57, Chicó", specs: "Falla de enlace backbone de 10Gbps entre rack 3 y datacenter.", tech: "Camilo Rodríguez (Técnico 2)", status: "En Ejecución", timeSaved: "45 min ahorrados" },
+        { id: "ORD-2026-090", client: "Centro Comercial Titán Plaza", phone: "+57 (601) 744-3000", type: "Auditoría de Ciberseguridad & Firewall", address: "Av. Boyacá # 80-94, Engativá", specs: "Configuración de reglas Fortinet y mitigación de cuellos de botella.", tech: "Esteban López (Técnico 4)", status: "En Ruta", timeSaved: "30 min ahorrados" },
+        { id: "ORD-2026-091", client: "Edificio Inteligente Connecta", phone: "+57 (601) 425-1000", type: "Cableado Estructurado Cat6A", address: "Calle 26 # 92-32, Fontibón", specs: "Peinado de rack de 48 puertos y certificación Fluke.", tech: "Juan Pérez (Técnico 1)", status: "Completada", timeSaved: "60 min ahorrados" },
+        { id: "ORD-2026-092", client: "Zona Franca de Bogotá S.A.", phone: "+57 (601) 404-6666", type: "Mantenimiento de Servidores & Racks", address: "Carrera 106 # 15-25, Fontibón", specs: "Reorganización de switches Cisco y reemplazo de patch cords.", tech: "Daniela Martínez (Técnico 3)", status: "Pendiente", timeSaved: "25 min ahorrados" }
+      ],
+
+      // 5 FIELD TECHNICIANS (GPS BOGOTÁ)
+      technicians: [
+        { name: "Juan Pérez (Técnico 1)", client: "Edificio Connecta (Calle 26)", status: "Disponible / En Standby", eta: "12 min", coords: { top: "52%", left: "38%" }, backpack: ["Patch Cord Cat6A x5", "Tester Fluke", "Ponchadora RJ45"] },
+        { name: "Camilo Rodríguez (Técnico 2)", client: "Clínica Country (Chapinero)", status: "En Ejecución de Obra", eta: "En Sitio", coords: { top: "35%", left: "62%" }, backpack: ["Fusionadora de Fibra", "ODTR JDSU", "Bobina Fibra 100m"] },
+        { name: "Daniela Martínez (Técnico 3)", client: "Bodega Central SHG (Calle 93)", status: "Cargando Insumos", eta: "5 min", coords: { top: "46%", left: "51%" }, backpack: ["Gabinete Rack 12U", "Switch Cisco 24P"] },
+        { name: "Esteban López (Técnico 4)", client: "CC Titán Plaza (Av. Boyacá)", status: "Tiempo Muerto / Detenido", eta: "40 min ETA", coords: { top: "28%", left: "40%" }, backpack: ["Firewall Fortigate 60F", "Licencia Sec"] },
+        { name: "Alejandro Ruiz (Técnico 5)", client: "Sede Bancaria Usaquén", status: "En Ruta por la NQS", eta: "18 min", coords: { top: "20%", left: "70%" }, backpack: ["Certificador Cable Fluke DSX", "Organizador"] }
+      ],
+
+      // INVENTORY BODEGA CALLE 26 BOGOTÁ
+      inventory: [
+        { id: "MAT-001", name: "Cable UTP Cat6A Panduit 305m", category: "Cableado", stock: 4, minReq: 10 },
+        { id: "MAT-002", name: "Patch Cord Fibra Óptica LC-LC 3m", category: "Fibra Óptica", stock: 45, minReq: 15 },
+        { id: "MAT-003", name: "Switch Cisco Catalyst 24 Puertos", category: "Redes", stock: 2, minReq: 5 },
+        { id: "MAT-004", name: "Conector RJ45 blindado Cat6A (Caja 100)", category: "Insumos", stock: 12, minReq: 8 },
+        { id: "MAT-005", name: "Transceiver SFP+ 10G Cisco Compatible", category: "Telecom", stock: 18, minReq: 10 },
+        { id: "MAT-006", name: "Organizador de Cable de 1U Horizontal", category: "Infraestructura", stock: 3, minReq: 6 }
+      ],
+
+      // AUDITORÍA MOVIMIENTOS QR
+      qrLogs: [
+        { time: "08:30 AM", item: "Cable UTP Cat6A Panduit 305m", type: "SALIDA", qty: 2, orderId: "ORD-2026-091", tech: "Juan Pérez" },
+        { time: "09:15 AM", item: "Patch Cord Fibra Óptica LC-LC", type: "SALIDA", qty: 6, orderId: "ORD-2026-089", tech: "Camilo Rodríguez" },
+        { time: "10:04 AM", item: "Switch Cisco Catalyst 24 Puertos", type: "ENTRADA", qty: 1, orderId: "Devolución Bodega", tech: "Daniela Martínez" }
+      ]
+    };
+
+    // WINDOW LOAD INITIALIZER
+    window.onload = function () {
+      startClock();
+      renderPQRTable();
+      renderClientsTable();
+      renderTechniciansAndMap();
+      renderInventoryTable();
+      renderQRLogs();
+      renderTeamChart();
+      updateBadges();
+      populateScannerSelect();
+      populateClientSelectModal();
+    };
+
+    // LIVE CLOCK FUNCTIONALITY
+    function startClock() {
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("liveClock").innerText = now.toLocaleTimeString('es-CO');
+      }, 1000);
+    }
+
+    // 1. RENDER PQR ORDERS TABLE
+    function renderPQRTable(data = state.orders) {
+      const tbody = document.getElementById("pqrTableBody");
+      tbody.innerHTML = data.map(order => {
+        let statusBadge = "";
+        if (order.status === 'Completada') {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono"><i class="fa-solid fa-circle-check mr-1"></i>Completada</span>`;
+        } else if (order.status === 'En Ejecución') {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono animate-pulse"><i class="fa-solid fa-spinner mr-1"></i>En Ejecución</span>`;
+        } else if (order.status === 'En Ruta') {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full bg-amber-950 text-amber-400 border border-amber-800 font-mono"><i class="fa-solid fa-truck-fast mr-1"></i>En Ruta</span>`;
+        } else {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700 font-mono"><i class="fa-solid fa-clock mr-1"></i>Pendiente</span>`;
+        }
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition-colors">
+            <td class="p-3.5 font-bold font-mono text-cyan-400">${order.id}</td>
+            <td class="p-3.5">
+              <div class="font-semibold text-slate-200">${order.client}</div>
+              <div class="text-[10px] text-slate-400 font-mono"><i class="fa-solid fa-location-dot mr-1 text-rose-400"></i>${order.address}</div>
+            </td>
+            <td class="p-3.5 text-slate-300">${order.type}</td>
+            <td class="p-3.5 text-slate-300"><i class="fa-solid fa-user-gear text-slate-500 mr-1.5"></i>${order.tech}</td>
+            <td class="p-3.5">${statusBadge}</td>
+            <td class="p-3.5 text-emerald-400 font-mono text-[11px]"><i class="fa-solid fa-bolt mr-1"></i>${order.timeSaved}</td>
+            <td class="p-3.5 text-right">
+              <button onclick="changeOrderStatus('${order.id}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-[11px] transition-all font-semibold">
+                Cambiar Estado
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // 2. RENDER CORPORATE CLIENTS TABLE (10 CLIENTS)
+    function renderClientsTable(data = state.clients) {
+      const tbody = document.getElementById("clientsTableBody");
+      tbody.innerHTML = data.map(client => {
+        let badgeClass = "bg-emerald-950 text-emerald-400 border-emerald-800";
+        if (client.status === 'En Proceso') badgeClass = "bg-cyan-950 text-cyan-400 border-cyan-800";
+        if (client.status === 'En Revisión') badgeClass = "bg-amber-950 text-amber-400 border-amber-800";
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition-colors">
+            <td class="p-3.5">
+              <div class="font-bold text-white">${client.name}</div>
+              <div class="text-[10px] font-mono text-cyan-400">NIT: ${client.nit}</div>
+            </td>
+            <td class="p-3.5">
+              <div class="text-slate-200 font-medium">${client.contact}</div>
+              <div class="text-[10px] text-slate-400 font-mono">${client.phone}</div>
+            </td>
+            <td class="p-3.5 text-slate-300 text-xs">
+              <i class="fa-solid fa-location-dot text-rose-400 mr-1"></i>${client.address}
+            </td>
+            <td class="p-3.5 text-slate-300">${client.service}</td>
+            <td class="p-3.5">
+              <span class="px-2.5 py-1 text-[10px] font-mono rounded-full border ${badgeClass}">${client.status}</span>
+            </td>
+            <td class="p-3.5 text-slate-300">
+              <i class="fa-solid fa-user-check mr-1 text-cyan-400"></i>${client.tech}
+            </td>
+            <td class="p-3.5 text-right">
+              <button onclick="quickOrderForClient('${client.name}', '${client.address}', '${client.service}')" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-cyan-300 border border-cyan-800 rounded-xl text-[11px] font-semibold transition-all">
+                <i class="fa-solid fa-plus mr-1"></i> Crear PQR
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // 3. RENDER INVENTORY TABLE
+    function renderInventoryTable(data = state.inventory) {
+      const tbody = document.getElementById("inventoryTableBody");
+      tbody.innerHTML = data.map(item => {
+        const isLow = item.stock <= item.minReq;
+        const statusBadge = isLow 
+          ? `<span class="px-2 py-0.5 rounded bg-rose-950/80 text-rose-400 border border-rose-800 font-mono text-[10px]"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Stock Bajo!</span>`
+          : `<span class="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-mono text-[10px]"><i class="fa-solid fa-circle-check mr-1"></i>Normal</span>`;
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition-colors">
+            <td class="p-3 font-semibold text-slate-200 flex items-center gap-2">
+              <i class="fa-solid fa-barcode text-slate-500 font-mono"></i>
+              ${item.name}
+            </td>
+            <td class="p-3 text-slate-400 font-sans">${item.category}</td>
+            <td class="p-3 font-mono text-sm font-bold ${isLow ? 'text-rose-400' : 'text-slate-100'}">${item.stock} u.</td>
+            <td class="p-3 font-mono text-slate-500">${item.minReq} u.</td>
+            <td class="p-3">${statusBadge}</td>
+            <td class="p-3 text-right">
+              <button onclick="openScannerModal('${item.id}')" class="px-3 py-1 bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-800/80 rounded-lg text-[11px] font-semibold transition-all">
+                <i class="fa-solid fa-qrcode mr-1"></i> Escanear
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // 4. RENDER QR LOGS
+    function renderQRLogs() {
+      const container = document.getElementById("qrLogsContainer");
+      container.innerHTML = state.qrLogs.map(log => `
+        <div class="bg-slate-950/80 border border-slate-800 p-2.5 rounded-xl text-xs space-y-1">
+          <div class="flex justify-between items-center font-mono">
+            <span class="${log.type === 'SALIDA' ? 'text-cyan-400' : 'text-emerald-400'} font-bold">
+              <i class="fa-solid ${log.type === 'SALIDA' ? 'fa-arrow-up-from-bracket' : 'fa-arrow-down-to-bracket'} mr-1"></i>
+              ${log.type} (${log.qty} u)
+            </span>
+            <span class="text-slate-500 text-[10px]">${log.time}</span>
+          </div>
+          <div class="text-slate-200 font-semibold">${log.item}</div>
+          <div class="text-[10px] text-slate-400 flex justify-between font-mono">
+            <span>Orden: ${log.orderId}</span>
+            <span>Técnico: ${log.tech}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 5. RENDER GPS MAP & TECHNICIANS
+    function renderTechniciansAndMap() {
+      const mapCanvas = document.getElementById("mapCanvas");
+      const techList = document.getElementById("techniciansList");
+
+      const warehouseHTML = `
+        <div class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer z-20">
+          <div class="w-10 h-10 rounded-full bg-purple-600/40 border-2 border-purple-400 flex items-center justify-center text-purple-200 text-xs shadow-lg pulse-glow">
+            <i class="fa-solid fa-warehouse"></i>
+          </div>
+          <span class="bg-slate-900 text-purple-300 font-mono text-[10px] px-2 py-0.5 rounded border border-purple-800 mt-1 shadow-md">Bodega Central SHG (Calle 93)</span>
+        </div>
+      `;
+
+      const techPinsHTML = state.technicians.map(t => `
+        <div class="absolute transition-all duration-1000 flex flex-col items-center group cursor-pointer" style="top:${t.coords.top}; left:${t.coords.left};">
+          <div class="w-8 h-8 rounded-full bg-cyan-500/30 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 text-xs shadow-lg">
+            <i class="fa-solid fa-motorcycle"></i>
+          </div>
+          <div class="bg-slate-900/90 text-slate-200 text-[10px] p-2 rounded-xl border border-cyan-800/80 shadow-xl font-mono whitespace-nowrap mt-1">
+            <div class="font-bold text-cyan-400">${t.name}</div>
+            <div class="text-slate-400">${t.client}</div>
+            <div class="text-emerald-400">ETA: ${t.eta}</div>
+          </div>
+        </div>
+      `).join('');
+
+      mapCanvas.innerHTML = warehouseHTML + techPinsHTML;
+
+      techList.innerHTML = state.technicians.map(t => `
+        <div class="bg-slate-950/70 border border-slate-800 p-3.5 rounded-xl space-y-2">
+          <div class="flex justify-between items-start">
+            <div>
+              <h4 class="font-bold text-xs text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-user-circle text-cyan-400"></i> ${t.name}
+              </h4>
+              <span class="text-[10px] text-slate-400 font-mono">Destino: ${t.client}</span>
+            </div>
+            <span class="px-2 py-0.5 text-[10px] font-mono rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">${t.status}</span>
+          </div>
+
+          <div>
+            <div class="text-[10px] uppercase font-mono tracking-wider text-slate-400 mb-1 flex items-center gap-1">
+              <i class="fa-solid fa-toolbox text-amber-400"></i> Maleta Virtual de Insumos:
+            </div>
+            <div class="flex flex-wrap gap-1">
+              ${t.backpack.map(b => `<span class="bg-slate-900 border border-slate-800 text-slate-300 text-[10px] px-2 py-0.5 rounded font-mono">${b}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 6. RENDER TEAM ORGANIZATIONAL CHART (13 EMPLOYEES)
+    function renderTeamChart() {
+      const container = document.getElementById("teamCardsContainer");
+      container.innerHTML = state.employees.map(emp => `
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex items-center gap-3 hover:border-cyan-500/40 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center ${emp.color} text-lg shrink-0">
+            <i class="fa-solid fa-${emp.icon}"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-white">${emp.name}</h4>
+            <p class="text-[11px] text-cyan-400 font-semibold">${emp.role}</p>
+            <span class="text-[10px] text-slate-500 font-mono">Área: ${emp.area}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // POPULATE DROPDOWNS
+    function populateClientSelectModal() {
+      const select = document.getElementById("pqrClientSelect");
+      select.innerHTML = state.clients.map(c => `<option value="${c.name}">${c.name} (${c.nit})</option>`).join('');
+    }
+
+    function populateScannerSelect() {
+      const select = document.getElementById("simulatedItemSelect");
+      select.innerHTML = state.inventory.map(i => `<option value="${i.id}">${i.name} (Stock: ${i.stock}u)</option>`).join('');
+    }
+
+    // UPDATE BADGES & KPI
+    function updateBadges() {
+      const lowStockCount = state.inventory.filter(i => i.stock <= i.minReq).length;
+      document.getElementById("badgeLowStockCount").innerText = lowStockCount;
+
+      const pendingOrders = state.orders.filter(o => o.status !== 'Completada').length;
+      document.getElementById("badgePqrCount").innerText = `${pendingOrders} Pendientes`;
+      document.getElementById("kpiTotalOrders").innerText = state.orders.length;
+
+      const completedCount = state.orders.filter(o => o.status === 'Completada').length;
+      const rate = Math.round((completedCount / state.orders.length) * 100);
+      document.getElementById("kpiCompletedRate").innerText = `${rate}% Cumplido`;
+    }
+
+    // REAL-TIME SEARCH FILTERS
+    function filterOrders() {
+      const query = document.getElementById("searchOrdersInput").value.toLowerCase();
+      const filtered = state.orders.filter(o => 
+        o.client.toLowerCase().includes(query) ||
+        o.id.toLowerCase().includes(query) ||
+        o.tech.toLowerCase().includes(query)
+      );
+      renderPQRTable(filtered);
+    }
+
+    function filterClients() {
+      const query = document.getElementById("searchClientsInput").value.toLowerCase();
+      const filtered = state.clients.filter(c => 
+        c.name.toLowerCase().includes(query) ||
+        c.nit.toLowerCase().includes(query) ||
+        c.address.toLowerCase().includes(query) ||
+        c.service.toLowerCase().includes(query)
+      );
+      renderClientsTable(filtered);
+    }
+
+    function filterInventory() {
+      const query = document.getElementById("searchInventoryInput").value.toLowerCase();
+      const filtered = state.inventory.filter(i => 
+        i.name.toLowerCase().includes(query) ||
+        i.category.toLowerCase().includes(query) ||
+        i.id.toLowerCase().includes(query)
+      );
+      renderInventoryTable(filtered);
+    }
+
+    // TAB NAVIGATION (SWITCH VIEWS)
+    function switchTab(tabId) {
+      ['dashboard', 'pqr', 'clients', 'warehouse', 'gps', 'team'].forEach(id => {
+        document.getElementById(`view-${id}`).classList.add("hidden");
+        const btn = document.getElementById(`tab-${id}`);
+        if(btn) {
+          btn.classList.remove("border-cyan-500/50", "bg-slate-800", "text-cyan-400");
+          btn.classList.add("border-transparent", "text-slate-400");
+        }
+      });
+
+      document.getElementById(`view-${tabId}`).classList.remove("hidden");
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if(activeBtn) {
+        activeBtn.classList.remove("border-transparent", "text-slate-400");
+        activeBtn.classList.add("border-cyan-500/50", "bg-slate-800", "text-cyan-400");
+      }
+    }
+
+    // MODAL HELPERS
+    function openModal(modalId) { document.getElementById(modalId).classList.remove("hidden"); }
+    function closeModal(modalId) { document.getElementById(modalId).classList.add("hidden"); }
+
+    function openScannerModal(selectedItemId = null) {
+      if (selectedItemId) {
+        document.getElementById("simulatedItemSelect").value = selectedItemId;
+      }
+      generateModalQRCode();
+      openModal("modalScanner");
+    }
+
+    function generateModalQRCode() {
+      const itemId = document.getElementById("simulatedItemSelect").value;
+      const item = state.inventory.find(i => i.id === itemId);
+      const qrContainer = document.getElementById("qrcodeDisplay");
+      qrContainer.innerHTML = "";
+
+      const payload = `SHG-BOGOTA-INVENTORY|ID:${item.id}|NAME:${item.name}|TIMESTAMP:${new Date().toISOString()}`;
+
+      new QRCode(qrContainer, {
+        text: payload,
+        width: 128,
+        height: 128,
+        colorDark: "#0284c7",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      document.getElementById("qrCodeCaption").innerText = `QR Oficial: ${item.id} - ${item.name}`;
+    }
+
+    // QUICK PQR CREATION FROM CLIENT TABLE
+    function quickOrderForClient(clientName, address, service) {
+      switchTab('pqr');
+      openModal('modalNewPQR');
+      document.getElementById('pqrClientSelect').value = clientName;
+      document.getElementById('pqrAddress').value = address;
+      document.getElementById('pqrServiceType').value = service;
+    }
+
+    // CREATE NEW PQR
+    function handleCreatePQR(e) {
+      e.preventDefault();
+      const client = document.getElementById("pqrClientSelect").value;
+      const phone = document.getElementById("pqrPhone").value;
+      const type = document.getElementById("pqrServiceType").value;
+      const address = document.getElementById("pqrAddress").value;
+      const specs = document.getElementById("pqrSpecs").value;
+
+      const newId = `ORD-2026-0${state.orders.length + 93}`;
+      const techList = ["Juan Pérez (Técnico 1)", "Camilo Rodríguez (Técnico 2)", "Esteban López (Técnico 4)", "Alejandro Ruiz (Técnico 5)"];
+      const assignedTech = techList[Math.floor(Math.random() * techList.length)];
+
+      const newOrder = {
+        id: newId,
+        client,
+        phone,
+        type,
+        address,
+        specs,
+        tech: assignedTech,
+        status: "Pendiente",
+        timeSaved: "35 min ahorrados"
+      };
+
+      state.orders.unshift(newOrder);
+      renderPQRTable();
+      updateBadges();
+      closeModal("modalNewPQR");
+      document.getElementById("formPQR").reset();
+      showToast("Orden de Servicio Registrada", `Orden ${newId} asignada automáticamente a ${assignedTech}.`);
+    }
+
+    // CHANGE ORDER STATUS
+    function changeOrderStatus(orderId) {
+      const order = state.orders.find(o => o.id === orderId);
+      if (!order) return;
+
+      const statuses = ["Pendiente", "En Ruta", "En Ejecución", "Completada"];
+      let currentIndex = statuses.indexOf(order.status);
+      let nextStatus = statuses[(currentIndex + 1) % statuses.length];
+
+      order.status = nextStatus;
+      renderPQRTable();
+      updateBadges();
+      showToast("Estado Actualizado", `La orden ${orderId} ahora está: ${nextStatus}`);
+    }
+
+    // EXECUTE REAL QR SCAN (ENTRADA / SALIDA)
+    function executeScan(type) {
+      const itemId = document.getElementById("simulatedItemSelect").value;
+      const item = state.inventory.find(i => i.id === itemId);
+      if (!item) return;
+
+      const qty = 2;
+      if (type === 'SALIDA') {
+        item.stock = Math.max(0, item.stock - qty);
+      } else {
+        item.stock += qty;
+      }
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      state.qrLogs.unshift({
+        time: timeStr,
+        item: item.name,
+        type: type,
+        qty: qty,
+        orderId: "ORD-2026-090",
+        tech: "Esteban López"
+      });
+
+      renderInventoryTable();
+      renderQRLogs();
+      updateBadges();
+      populateScannerSelect();
+      closeModal("modalScanner");
+
+      showToast("Escaneo QR Exitoso", `Se registró ${type} de ${qty} unidades de ${item.name}.`);
+    }
+
+    // PROACTIVE OPTIMIZATION HANDLER
+    function applySmartOptimization() {
+      document.getElementById("proactiveEngineText").innerHTML = `
+        <span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>Optimización Aplicada:</span> 
+        Ruta recalculada vía Waze API Bogotá para Técnico 4. Tiempo muerto eliminado (-45 min).
+      `;
+      document.getElementById("kpiDeadTimeAlerts").innerText = "0";
+      document.getElementById("kpiDeadTimeSub").innerText = "Sin inactividad detectada";
+      document.getElementById("kpiProductivity").innerText = "98.2%";
+      showToast("IA Operativa SHG", "Rutas y despachos optimizados con éxito.");
+    }
+
+    function reassignTechAlert(techName) {
+      showToast("Ruta Optimizada", `Se envió instrucción vía GPS a ${techName} desviando tráfico de la Av. Boyacá.`);
+    }
+
+    function exportReport() {
+      showToast("Reporte Generado", "Se ha exportado el informe de tiempos ahorrados e inventarios SHG.");
+    }
+
+    // TOAST NOTIFICATIONS
+    function showToast(title, message) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastTitle").innerText = title;
+      document.getElementById("toastMessage").innerText = message;
+
+      toast.classList.remove("translate-y-20", "opacity-0");
+      setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0");
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
